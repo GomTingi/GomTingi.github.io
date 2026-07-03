@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Git Guide</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f5f7fb;
+    color:#222;
+    transition:.3s;
+}
+
+body.dark{
+    background:#121212;
+    color:#eee;
+}
+
+header{
+    background:linear-gradient(135deg,#ff6b35,#ff8c42);
+    color:white;
+    padding:50px 20px;
+    text-align:center;
+}
+
+header h1{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+header p{
+    font-size:1.2rem;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    z-index:100;
+}
+
+body.dark nav{
+    background:#1d1d1d;
+}
+
+nav a{
+    padding:18px;
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+}
+
+body.dark nav a{
+    color:white;
+}
+
+nav a:hover{
+    color:#ff6b35;
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    padding:40px 0;
+}
+
+.card{
+    background:white;
+    margin-bottom:30px;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+body.dark .card{
+    background:#1f1f1f;
+}
+
+h2{
+    color:#ff6b35;
+    margin-bottom:20px;
+}
+
+h3{
+    margin:20px 0 10px;
+}
+
+pre{
+    background:#272822;
+    color:#e6e6e6;
+    padding:15px;
+    border-radius:8px;
+    overflow:auto;
+    margin:15px 0;
+}
+
+code{
+    font-family:Consolas;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:12px;
+    text-align:left;
+}
+
+body.dark th,
+body.dark td{
+    border-color:#444;
+}
+
+th{
+    background:#ff6b35;
+    color:white;
+}
+
+.timeline{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.step{
+    flex:1;
+    min-width:150px;
+    background:#f2f2f2;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+}
+
+body.dark .step{
+    background:#2d2d2d;
+}
+
+.step span{
+    display:block;
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+button{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#ff6b35;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    background:#222;
+    color:white;
+    margin-top:50px;
+}
+
+ul{
+    margin-left:20px;
+}
+
+li{
+    margin:8px 0;
+}
+
+@media(max-width:700px){
+
+header h1{
+font-size:2rem;
+}
+
+.timeline{
+flex-direction:column;
+}
+
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<h1>Git Guide</h1>
+<p>Git을 처음 배우는 사람을 위한 입문 가이드</p>
+</header>
+
+<nav>
+<a href="#intro">소개</a>
+<a href="#install">설치</a>
+<a href="#basic">기본개념</a>
+<a href="#command">명령어</a>
+<a href="#flow">작업흐름</a>
+<a href="#faq">FAQ</a>
+</nav>
+
+<div class="container">
+
+<section id="intro" class="card">
+
+<h2>📖 Git이란?</h2>
+
+<p>
+
+Git은 버전 관리 시스템(Version Control System)입니다.
+프로젝트의 변경사항을 기록하고, 이전 버전으로 되돌릴 수 있으며 여러 사람이 동시에 협업할 수 있도록 도와줍니다.
+
+</p>
+
+<h3>Git의 장점</h3>
+
+<ul>
+<li>변경 이력 관리</li>
+<li>여러 명이 동시에 협업 가능</li>
+<li>브랜치를 이용한 독립적인 개발</li>
+<li>실수해도 이전 버전으로 복구 가능</li>
+<li>GitHub와 함께 사용 가능</li>
+</ul>
+
+</section>
+
+<section id="install" class="card">
+
+<h2>💻 설치 방법</h2>
+
+<h3>Windows</h3>
+
+<pre><code>https://git-scm.com</code></pre>
+
+Git for Windows 다운로드 후 기본 옵션으로 설치하면 됩니다.
+
+<h3>macOS</h3>
+
+<pre><code>brew install git</code></pre>
+
+또는
+
+<pre><code>xcode-select --install</code></pre>
+
+<h3>Ubuntu</h3>
+
+<pre><code>sudo apt update
+sudo apt install git</code></pre>
+
+<h3>설치 확인</h3>
+
+<pre><code>git --version</code></pre>
+
+</section>
+
+<section id="basic" class="card">
+
+<h2>🌿 Git 기본 개념</h2>
+
+<table>
+
+<tr>
+<th>용어</th>
+<th>설명</th>
+</tr>
+
+<tr>
+<td>Repository</td>
+<td>프로젝트 저장소</td>
+</tr>
+
+<tr>
+<td>Commit</td>
+<td>변경사항 저장</td>
+</tr>
+
+<tr>
+<td>Branch</td>
+<td>독립적인 작업 공간</td>
+</tr>
+
+<tr>
+<td>Merge</td>
+<td>브랜치 합치기</td>
+</tr>
+
+<tr>
+<td>Remote</td>
+<td>원격 저장소(GitHub)</td>
+</tr>
+
+</table>
+
+</section>
+
+<section id="command" class="card">
+
+<h2>⌨️ 자주 사용하는 명령어</h2>
+
+<h3>저장소 생성</h3>
+
+<pre><code>git init</code></pre>
+
+<h3>복제</h3>
+
+<pre><code>git clone URL</code></pre>
+
+<h3>상태 확인</h3>
+
+<pre><code>git status</code></pre>
+
+<h3>파일 추가</h3>
+
+<pre><code>git add .</code></pre>
+
+<h3>커밋</h3>
+
+<pre><code>git commit -m "메시지"</code></pre>
+
+<h3>로그 보기</h3>
+
+<pre><code>git log --oneline --graph</code></pre>
+
+<h3>브랜치 생성</h3>
+
+<pre><code>git branch feature/login</code></pre>
+
+<h3>브랜치 이동</h3>
+
+<pre><code>git switch feature/login</code></pre>
+
+<h3>병합</h3>
+
+<pre><code>git merge feature/login</code></pre>
+
+<h3>원격 업로드</h3>
+
+<pre><code>git push origin main</code></pre>
+
+<h3>최신 내용 가져오기</h3>
+
+<pre><code>git pull origin main</code></pre>
+
+</section>
+
+<section id="flow" class="card">
+
+<h2>🔄 Git 작업 흐름</h2>
+
+<div class="timeline">
+
+<div class="step">
+<span>📄</span>
+파일 수정
+</div>
+
+<div class="step">
+<span>➕</span>
+git add
+</div>
+
+<div class="step">
+<span>💾</span>
+git commit
+</div>
+
+<div class="step">
+<span>☁️</span>
+git push
+</div>
+
+<div class="step">
+<span>👨‍💻</span>
+GitHub
+</div>
+
+</div>
+
+</section>
+
+<section class="card">
+
+<h2>🚀 추천 학습 순서</h2>
+
+<ol>
+
+<li>git init</li>
+
+<li>git status</li>
+
+<li>git add</li>
+
+<li>git commit</li>
+
+<li>git log</li>
+
+<li>git branch</li>
+
+<li>git switch</li>
+
+<li>git merge</li>
+
+<li>git clone</li>
+
+<li>git push / pull</li>
+
+</ol>
+
+</section>
+
+<section id="faq" class="card">
+
+<h2>❓ FAQ</h2>
+
+<h3>Git과 GitHub는 같은 것인가요?</h3>
+
+<p>
+아닙니다.
+Git은 버전관리 프로그램이고 GitHub는 Git 저장소를 온라인에서 관리하는 서비스입니다.
+</p>
+
+<h3>commit과 push 차이는?</h3>
+
+<p>
+
+commit은 내 컴퓨터에 저장하는 것이고,
+push는 GitHub 같은 원격 저장소에 업로드하는 것입니다.
+
+</p>
+
+<h3>branch는 왜 사용하나요?</h3>
+
+<p>
+
+기존 코드를 망가뜨리지 않고 새로운 기능을 개발하기 위해 사용합니다.
+
+</p>
+
+</section>
+
+</div>
+
+<button onclick="toggleTheme()">🌙</button>
+
+<footer>
+
+Git Guide Example<br>
+
+HTML + CSS + JavaScript Only
+
+</footer>
+
+<script>
+
+function toggleTheme(){
+
+document.body.classList.toggle("dark");
+
+}
+
+</script>
+
+</body>
+</html>
